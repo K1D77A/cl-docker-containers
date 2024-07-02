@@ -7,8 +7,11 @@ jobs:
     steps:
       -
         name: Login to GHCR
-        run: |
-          docker login --username k1d77a --password ${{ secrets.PAT }} ghcr.io 
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
       -
         name: Build and push
         uses: docker/build-push-action@v6
@@ -16,4 +19,5 @@ jobs:
           file: ./sbcl.ql-and-slynk/Dockerfile
           push: true
           tags: k1d77a/sbcl.ql-and-slynk:latest
+
 
