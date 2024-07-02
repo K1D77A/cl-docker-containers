@@ -8,12 +8,12 @@ They are currently SBCL version 2.4.5
 
 
 
-- Container: ghcr.io/k1d77a/sbcl.ql-and-slynk
--- Core: ql-and-slynk
+## Container: ghcr.io/k1d77a/sbcl.ql-and-slynk
+### Core: ql-and-slynk
 
 
-- Container: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp
--- Core: ql-slynk-ultralisp 
+## Container: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp
+### Core: ql-slynk-ultralisp 
 
 To build
 ```
