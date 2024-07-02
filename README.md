@@ -2,7 +2,7 @@
 
 Currently 2 Dockerfiles for SBCL that will build a SBCL Core file that can be used with multi stage builds.
 
-They are available in the ghcr.io/k1d77a/
+They are available @ ghcr.io/k1d77a/
 
 They are currently SBCL version 2.4.5
 
@@ -10,10 +10,12 @@ They are currently SBCL version 2.4.5
 
 ## Container: ghcr.io/k1d77a/sbcl.ql-and-slynk
 ### Core: ql-and-slynk
+This comes with a core file containing Quicklisp and Slynk. 
 
 
 ## Container: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp
-### Core: ql-slynk-ultralisp 
+### Core: ql-slynk-ultralisp
+This comes with a core file containing Quicklisp, Slynk and Ultralisp.
 
 To build
 ```
@@ -30,9 +32,9 @@ Here is an example of how to use the sbcl.ql-and-slynk in a multi stage build
 ```
 # syntax=docker/dockerfile:1
 
-FROM sbcl.ql-and-slynk AS sbcl.with-ultralisp
+FROM ghcr.io/k1d77a/sbcl.ql-and-slynk AS sbcl.with-ultralisp
 
-ARG CORE=ghcr.io/k1d77a/sbcl.ql-and-slynk #brought from the OG Dockerfile
+ARG CORE=ql-and-slynk
 
 WORKDIR /root/
 COPY --from=sbcl.ql-and-slynk /root/quicklisp /root/quicklisp
