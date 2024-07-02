@@ -1,0 +1,14 @@
+name: auto-build-and-push
+run-name: Build and push to ghcr.io 
+on: [push]
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4    
+      - run: |
+          docker login --username ${{github.actor}} --password ${{secrets.PAT}} ghcr.io
+          docker build buildx -f sbcl.ql-and-slynk/Dockerfile -t ghcr.io/${{github.actor}}/sbcl.ql-and-slynk:latest
+          docker push ghcr.io/${{github.actor}}/sbcl.ql-and-slynk:latest
+          
+
