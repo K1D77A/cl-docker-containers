@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           docker login --username ${{github.actor}} --password ${{secrets.PAT}} ghcr.io
-          docker build -f Dockerfile . -t ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
+          docker build -f ./sbcl.ql-and-slynk/Dockerfile . -t ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
           docker push ghcr.io/k1d77a/sbcl.ql-and-slynk:latest gh
           
     # steps:
