@@ -5,19 +5,26 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.PAT }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          file: ./sbcl.ql-and-slynk/Dockerfile
-          push: true
-          tags: k1d77a/sbcl.ql-and-slynk:latest
+      - uses: actions/checkout@v4
+      - run: |
+          docker login --username ${{github.actor}} --password ${{secrets.PAT}} ghcr.io
+          docker build -f Dockerfile . -t ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
+          docker push ghcr.io/k1d77a/sbcl.ql-and-slynk:latest gh
+          
+    # steps:
+    #   -
+    #     name: Login to GHCR
+    #     uses: docker/login-action@v3
+    #     with:
+    #       registry: ghcr.io
+    #       username: ${{ github.actor }}
+    #       password: ${{ secrets.PAT }}
+    #   -
+    #     name: Build and push
+    #     uses: docker/build-push-action@v6
+    #     with:
+    #       file: ./sbcl.ql-and-slynk/Dockerfile
+    #       push: true
+    #       tags: k1d77a/sbcl.ql-and-slynk:latest
 
 
