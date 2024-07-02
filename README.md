@@ -1,11 +1,22 @@
 # cl-docker-containers
 
-Currently 1 Dockerfile for SBCL that will build a SBCL Core file that can be used with multi stage builds.
+Currently 2 Dockerfiles for SBCL that will build a SBCL Core file that can be used with multi stage builds.
+
+## Container: sbcl.ql-and-slynk
+### Core: ql-and-slynk
+## Container: sbcl.ql-slynk-ultralisp
+### Core: ql-slynk-ultralisp 
 
 To build
 ```
 docker buildx build -f Dockerfile . -t sbcl.ql-and-slynk
 ```
+
+To grab from gchr.io
+```
+FROM ghcr.io/k1d77a/sbcl.ql-and-slynk:latest AS base
+```
+
 
 Here is an example of how to use the sbcl.ql-and-slynk in a multi stage build 
 

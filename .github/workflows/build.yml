@@ -3,13 +3,7 @@ run-name: Build and push to ghcr.io
 on: [push]
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
-      # - uses: actions/checkout@v4
-      # - run: |
-      #     docker login --username ${{github.actor}} --password ${{secrets.PAT}} ghcr.io
-      #     docker build -f ./sbcl.ql-and-slynk/Dockerfile . -t ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
-      #     docker push ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
-          
+    runs-on: ubuntu-latest 
     steps:
       -
         name: Login to GHCR
@@ -19,11 +13,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
       -
-        name: Build and push
+        name: Build and push ql-and-slynk
         uses: docker/build-push-action@v6
         with:
           file: ./sbcl.ql-and-slynk/Dockerfile
           push: true
           tags: ghcr.io/k1d77a/sbcl.ql-and-slynk:latest
+      -
+        name: Build and push ql-slynk-ultralisp
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-slynk-ultralisp/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp:latest
 
 
