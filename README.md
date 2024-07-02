@@ -2,10 +2,18 @@
 
 Currently 2 Dockerfiles for SBCL that will build a SBCL Core file that can be used with multi stage builds.
 
-## Container: sbcl.ql-and-slynk
-### Core: ql-and-slynk
-## Container: sbcl.ql-slynk-ultralisp
-### Core: ql-slynk-ultralisp 
+They are available in the ghcr.io/k1d77a/
+
+They are currently SBCL version 2.4.5
+
+
+
+- Container: ghcr.io/k1d77a/sbcl.ql-and-slynk
+-- Core: ql-and-slynk
+
+
+- Container: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp
+-- Core: ql-slynk-ultralisp 
 
 To build
 ```
@@ -17,7 +25,6 @@ To grab from gchr.io
 FROM ghcr.io/k1d77a/sbcl.ql-and-slynk:latest AS base
 ```
 
-
 Here is an example of how to use the sbcl.ql-and-slynk in a multi stage build 
 
 ```
@@ -25,24 +32,11 @@ Here is an example of how to use the sbcl.ql-and-slynk in a multi stage build
 
 FROM sbcl.ql-and-slynk AS sbcl.with-ultralisp
 
-ARG CORE=ql-and-slynk #brought from the OG Dockerfile
+ARG CORE=ghcr.io/k1d77a/sbcl.ql-and-slynk #brought from the OG Dockerfile
 
 WORKDIR /root/
 COPY --from=sbcl.ql-and-slynk /root/quicklisp /root/quicklisp
 COPY --from=sbcl.ql-and-slynk /root/$CORE /root/$CORE
-    
-RUN sbcl --core $CORE \
-         --eval '(ql-dist:install-dist "http://dist.ultralisp.org/" :prompt nil)' \
-         --eval '(ql:update-dist "ultralisp" :prompt nil)' \
-         --eval '(slynk-loader:dump-image "my-new-core")'
-```
-This will create a container to be used in the next stage where you can copy 'my-new-core' into the subsequent stage and build on top of that.
-
-
-Here is an example of how you can load all of the dependencies for a CL project into an SBCL Core without actually loading the system itself. This is very useful within Docker because we all know how long it can take to compile libraries like Ironclad.
-
-
-```
 COPY my-project.asd ./
 RUN sbcl --core ql-and-slynk \
          --load "my-project" \
@@ -50,7 +44,8 @@ RUN sbcl --core ql-and-slynk \
          --eval '(slynk-loader:dump-image "my-projects-dependencies")'
 
 ```
-Now you can use the SBCL Core file 'my-projects-dependencies' within the multi stage build in order to have a container that has all of the projects dependencies already loaded into SBCL. 
+Now you can use the SBCL Core file 'my-projects-dependencies' within the multi stage build in order to have a container that has all of the projects dependencies already loaded into SBCL.
+
 
 
 
