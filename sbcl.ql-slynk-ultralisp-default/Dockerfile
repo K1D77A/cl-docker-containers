@@ -3,8 +3,7 @@ FROM ghcr.io/k1d77a/sbcl.ql-and-slynk-default:latest AS build
 WORKDIR /root/
 
 COPY --from=ghcr.io/k1d77a/sbcl.ql-and-slynk-default:latest /root/quicklisp /root/quicklisp
-RUN sbcl --core $CORE \
-         --eval '(ql-dist:install-dist "http://dist.ultralisp.org/" :prompt nil)' \
+RUN sbcl --eval '(ql-dist:install-dist "http://dist.ultralisp.org/" :prompt nil)' \
          --eval '(ql:update-dist "ultralisp" :prompt nil)' \
          --eval '(slynk-loader:dump-image "sbcl.core")' \
          --quit
