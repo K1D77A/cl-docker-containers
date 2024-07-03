@@ -1,7 +1,9 @@
 run-name: Auto build ultralisp version
+
 on:
-  Schedule: 
+  schedule: 
     - cron: '22 1 * * *'
+      
 jobs:
   build-and-push:
     runs-on: ubuntu-latest 
