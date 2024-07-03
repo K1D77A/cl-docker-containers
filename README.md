@@ -29,28 +29,23 @@ Configures SBCL to use maximum safety settings.
 Makes no adjustments to SBCLs compilation settings.
 
 
-To build
+To grab one from gchr.io
 ```
-docker buildx build -f Dockerfile . -t sbcl.ql-and-slynk
-```
-
-To grab from gchr.io
-```
-FROM ghcr.io/k1d77a/sbcl.ql-and-slynk:latest AS base
+FROM ghcr.io/k1d77a/sbcl.ql-and-slynk-safe:latest AS base
 ```
 
-Here is an example of how to use the sbcl.ql-and-slynk in a multi stage build 
+Here is an example of how to use the sbcl.ql-and-slynk-safe in a multi stage build 
 
 ```
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/k1d77a/sbcl.ql-and-slynk AS sbcl.with-ultralisp
+FROM ghcr.io/k1d77a/sbcl.ql-and-slynk-safe AS sbcl.with-ultralisp
 
 ARG CORE=ql-and-slynk
 
 WORKDIR /root/
-COPY --from=sbcl.ql-and-slynk /root/quicklisp /root/quicklisp
-COPY --from=sbcl.ql-and-slynk /root/$CORE /root/$CORE
+COPY --from=sbcl.ql-and-slynk-safe /root/quicklisp /root/quicklisp
+COPY --from=sbcl.ql-and-slynk-safe /root/$CORE /root/$CORE
 COPY my-project.asd ./
 RUN sbcl --core ql-and-slynk \
          --load "my-project" \

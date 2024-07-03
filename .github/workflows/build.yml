@@ -19,7 +19,7 @@ jobs:
           file: ./sbcl.ql-and-slynk-safe/Dockerfile
           push: true
           tags: ghcr.io/k1d77a/sbcl.ql-and-slynk-safe:latest
-                -
+      -
         name: Build and push ql-and-slynk-default
         uses: docker/build-push-action@v6
         with:
