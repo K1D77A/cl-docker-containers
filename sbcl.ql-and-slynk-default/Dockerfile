@@ -2,7 +2,6 @@
 
 FROM alpine AS sbcl.ql-and-slynk-default
 ARG VERSION=2.4.5
-ARG CORE=ql-and-slynk
 
 RUN apk add --update build-base linux-headers zstd-dev git sbcl;
 
@@ -24,8 +23,16 @@ WORKDIR /root/
 RUN echo "(load \"quicklisp/setup.lisp\")" >> setup.lisp
 RUN echo "(load \"quicklisp/local-projects/sly/slynk/slynk-loader.lisp\")" >> setup.lisp
 RUN echo "(ql:update-all-dists :prompt nil)" >> setup.lisp
-RUN echo "(slynk-loader:dump-image \"$CORE\")" >> setup.lisp
+RUN echo "(slynk-loader:dump-image \"sbcl.core\")" >> setup.lisp
 
 
 RUN sbcl --load setup.lisp --quit
-                                     
+
+FROM alpine AS sbcl.ql-and-slynk-safe
+RUN apk add --no-cache --update zstd-dev
+WORKDIR /root/
+COPY --from=build /usr/local/lib/sbcl /usr/lib/sbcl
+RUN rm /usr/lib/sbcl/sbcl.core
+COPY --from=build /usr/local/bin/sbcl /usr/bin/sbcl
+COPY --from=build /root/quicklisp /root/quicklisp
+COPY --from=build /root/sbcl.core /usr/lib/sbcl/
