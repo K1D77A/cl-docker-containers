@@ -11,7 +11,7 @@ RUN tar xvfz sbcl.tar.gz && rm sbcl.tar.gz
 WORKDIR /sbcl-sbcl-$VERSION
 RUN echo "\"$VERSION\"" > version.lisp-expr
 RUN SBCL_HOME=/usr/lib64/sbcl/ sh make.sh --fancy --dynamic-space-size=4Gb
-RUN sh install.sh
+RUN INSTALL_ROOT=/usr/ sh install.sh
 WORKDIR /root/
 ADD https://beta.quicklisp.org/quicklisp.lisp quicklisp.lisp
 RUN sbcl --load quicklisp.lisp --eval '(quicklisp-quickstart:install)'
@@ -31,8 +31,8 @@ RUN sbcl --load setup.lisp --quit
 FROM alpine AS sbcl.ql-and-slynk-default
 RUN apk add --no-cache --update zstd-dev
 WORKDIR /root/
-COPY --from=build /usr/local/lib/sbcl /usr/lib/sbcl
+COPY --from=build /usr/lib/sbcl /usr/lib/sbcl
 RUN rm /usr/lib/sbcl/sbcl.core
-COPY --from=build /usr/local/bin/sbcl /usr/bin/sbcl
+COPY --from=build /usr/bin/sbcl /usr/bin/sbcl
 COPY --from=build /root/quicklisp /root/quicklisp
 COPY --from=build /root/sbcl.core /usr/lib/sbcl/

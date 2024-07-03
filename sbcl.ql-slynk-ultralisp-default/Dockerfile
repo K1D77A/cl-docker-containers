@@ -14,7 +14,6 @@ WORKDIR /root/
 COPY --from=build /usr/lib/sbcl /usr/lib/sbcl
 RUN rm /usr/lib/sbcl/sbcl.core
 COPY --from=build /usr/bin/sbcl /usr/bin/sbcl
-COPY --from=build /usr/lib/sbcl /usr/lib/sbcl
 COPY --from=build /root/quicklisp /root/quicklisp
 COPY --from=build /root/sbcl.core /usr/lib/sbcl/
 
