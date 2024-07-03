@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine AS sbcl.ql-and-slynk-default
+FROM alpine AS build
 ARG VERSION=2.4.5
 
 RUN apk add --update build-base linux-headers zstd-dev git sbcl;
@@ -28,7 +28,7 @@ RUN echo "(slynk-loader:dump-image \"sbcl.core\")" >> setup.lisp
 
 RUN sbcl --load setup.lisp --quit
 
-FROM alpine AS sbcl.ql-and-slynk-safe
+FROM alpine AS sbcl.ql-and-slynk-default
 RUN apk add --no-cache --update zstd-dev
 WORKDIR /root/
 COPY --from=build /usr/local/lib/sbcl /usr/lib/sbcl
