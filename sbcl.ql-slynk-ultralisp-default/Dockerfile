@@ -1,6 +1,6 @@
 FROM ghcr.io/k1d77a/sbcl.ql-and-slynk-default:latest AS sbcl.ql-slynk-ultralisp-default
 
-ARG CORE=ql-and-slynk-default
+ARG CORE=ql-and-slynk
 
 WORKDIR /root/
 

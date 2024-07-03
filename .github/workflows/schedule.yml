@@ -1,0 +1,31 @@
+run-name: Auto build ultralisp version
+on:
+  Schedule: 
+    - cron: '22 1 * * *'
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest 
+    steps:
+      -
+        name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+      -
+        name: Build and push ql-slynk-ultralisp-safe
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-slynk-ultralisp-safe/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp-safe:latest
+      -
+        name: Build and push ql-slynk-ultralisp-default
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-slynk-ultralisp-default/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp-default:latest
+
+      

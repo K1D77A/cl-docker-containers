@@ -6,6 +6,8 @@ They are available @ ghcr.io/k1d77a/
 
 They are currently SBCL version 2.4.5
 
+The Ultralisp versions are updated every 24h. 
+
 
 ## Container: ghcr.io/k1d77a/sbcl.ql-and-slynk*
 ### Core: ql-and-slynk

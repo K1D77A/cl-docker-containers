@@ -1,6 +1,6 @@
 FROM ghcr.io/k1d77a/sbcl.ql-and-slynk-safe:latest AS sbcl.ql-slynk-ultralisp-safe
 
-ARG CORE=ql-and-slynk-safe
+ARG CORE=ql-and-slynk
 
 WORKDIR /root/
 
