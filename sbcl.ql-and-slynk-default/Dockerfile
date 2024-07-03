@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine AS sbcl.ql-and-slynk
+FROM alpine AS sbcl.ql-and-slynk-default
 ARG VERSION=2.4.5
 ARG CORE=ql-and-slynk
 
@@ -21,10 +21,6 @@ WORKDIR /root/quicklisp/local-projects/
 RUN git clone https://github.com/joaotavora/sly.git
 
 WORKDIR /root/
-RUN echo "(sb-ext:restrict-compiler-policy 'safety 3 3)" >> setup.lisp 
-RUN echo "(sb-ext:restrict-compiler-policy 'debug 3 3)" >>  setup.lisp 
-RUN echo "(sb-ext:restrict-compiler-policy 'space 1 1)" >>  setup.lisp 
-RUN echo "(sb-ext:restrict-compiler-policy 'speed 0 0)" >>  setup.lisp
 RUN echo "(load \"quicklisp/setup.lisp\")" >> setup.lisp
 RUN echo "(load \"quicklisp/local-projects/sly/slynk/slynk-loader.lisp\")" >> setup.lisp
 RUN echo "(ql:update-all-dists :prompt nil)" >> setup.lisp
