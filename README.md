@@ -1,12 +1,15 @@
 # cl-docker-containers
 
-Currently 4 Dockerfiles that build a version of SBCL that preloads certain libraries and configures compilation settings and then changes the sbcl.core file. This is designed to be used with multi stage builds.
+Currently 4 Dockerfiles that build a version of SBCL that preloads certain libraries and configures compilation settings and then changes the sbcl.core file.
+This is designed to be used with multi stage builds.
 
 They are available @ ghcr.io/k1d77a/
 
 They are currently SBCL version 2.4.5
 
 The Ultralisp versions are updated every 24h. 
+
+There are versions with the latest version of Sly or SLIME. 
 
 ### Container: ghcr.io/k1d77a/sbcl.ql-and-slynk*
 #### sbcl.ql-and-slynk-safe
@@ -23,6 +26,23 @@ Configures SBCL to use maximum safety settings.
 
 #### sbcl.ql-slynk-ultralisp-default
 Makes no adjustments to SBCLs compilation settings.
+
+### Container: ghcr.io/k1d77a/sbcl.ql-and-swank*
+#### sbcl.ql-and-swank-safe
+
+Configures SBCL to use maximum safety settings.
+
+#### sbcl.ql-and-swank-default
+Makes no adjustments to SBCLs compilation settings.
+
+
+### Container: ghcr.io/k1d77a/sbcl.ql-swank-ultralisp*
+#### sbcl.ql-swank-ultralisp-safe
+Configures SBCL to use maximum safety settings.
+
+#### sbcl.ql-swank-ultralisp-default
+Makes no adjustments to SBCLs compilation settings.
+
 
 
 To grab one from gchr.io

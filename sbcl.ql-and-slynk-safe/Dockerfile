@@ -24,7 +24,6 @@ RUN git clone https://github.com/joaotavora/sly.git
 
 WORKDIR /root/
 RUN echo "(sb-ext:restrict-compiler-policy 'safety 3 3)" >> setup.lisp 
-RUN echo "(sb-ext:restrict-compiler-policy 'debug 3 3)" >>  setup.lisp 
 RUN echo "(sb-ext:restrict-compiler-policy 'space 1 1)" >>  setup.lisp 
 RUN echo "(sb-ext:restrict-compiler-policy 'speed 0 0)" >>  setup.lisp
 RUN echo "(load \"quicklisp/setup.lisp\")" >> setup.lisp
