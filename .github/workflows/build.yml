@@ -25,7 +25,7 @@ jobs:
         with:
           file: ./sbcl.ql-and-slynk-default/Dockerfile
           push: true
-          tags: ghcr.io/k1d77a/sbcl.ql-and-slynk-default:latest
+          tags: ghcr.io/k1d77a/sbcl.ql-and-slynk-default:latest      -
       -
         name: Build and push ql-slynk-ultralisp-safe
         uses: docker/build-push-action@v6
@@ -40,5 +40,33 @@ jobs:
           file: ./sbcl.ql-slynk-ultralisp-default/Dockerfile
           push: true
           tags: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp-default:latest
+      -
+        name: Build and push ql-and-swank-safe
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-and-swank-safe/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-and-swank-safe:latest
+      -
+        name: Build and push ql-and-swank-default
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-and-swank-default/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-and-swank-default:latest      -
+      -
+        name: Build and push ql-swank-ultralisp-safe
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-swank-ultralisp-safe/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-swank-ultralisp-safe:latest
+      -
+        name: Build and push ql-swank-ultralisp-default
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-swank-ultralisp-default/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-swank-ultralisp-default:latest
 
 

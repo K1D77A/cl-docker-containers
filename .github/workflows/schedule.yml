@@ -29,5 +29,19 @@ jobs:
           file: ./sbcl.ql-slynk-ultralisp-default/Dockerfile
           push: true
           tags: ghcr.io/k1d77a/sbcl.ql-slynk-ultralisp-default:latest
+      -
+        name: Build and push ql-swank-ultralisp-safe
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-swank-ultralisp-safe/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-swank-ultralisp-safe:latest
+      -
+        name: Build and push ql-swank-ultralisp-default
+        uses: docker/build-push-action@v6
+        with:
+          file: ./sbcl.ql-swank-ultralisp-default/Dockerfile
+          push: true
+          tags: ghcr.io/k1d77a/sbcl.ql-swank-ultralisp-default:latest
 
       
